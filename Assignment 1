@@ -1,1 +1,130 @@
+//Q1
+#include <iostream>
+using namespace std;
 
+#define MAX 100
+int arr[MAX], n = 0;
+
+void create() {
+    cout << "Enter size of array: ";
+    cin >> n;
+    cout << "Enter " << n << " elements: ";
+    for (int i = 0; i < n; i++) cin >> arr[i];
+}
+
+void display() {
+    if (n == 0) { cout << "Array is empty\n"; return; }
+    cout << "Array elements: ";
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    cout << endl;
+}
+
+void insertElement() {
+    int pos, val;
+    if (n == MAX) { cout << "Array full!\n"; return; }
+    cout << "Enter position (0-" << n << "): ";
+    cin >> pos;
+    cout << "Enter value: ";
+    cin >> val;
+    for (int i = n; i > pos; i--) arr[i] = arr[i-1];
+    arr[pos] = val;
+    n++;
+}
+
+void deleteElement() {
+    int pos;
+    if (n == 0) { cout << "Array empty!\n"; return; }
+    cout << "Enter position (0-" << n-1 << "): ";
+    cin >> pos;
+    for (int i = pos; i < n-1; i++) arr[i] = arr[i+1];
+    n--;
+}
+
+void linearSearch() {
+    int key, found = 0;
+    cout << "Enter element to search: ";
+    cin >> key;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == key) {
+            cout << "Element found at position " << i << endl;
+            found = 1;
+            break;
+        }
+    }
+    if (!found) cout << "Element not found\n";
+}
+
+int main() {
+    int choice;
+    while (1) {
+        cout << "\n---MENU---\n";
+        cout << "1.CREATE\n2.DISPLAY\n3.INSERT\n4.DELETE\n5.LINEAR SEARCH\n6.EXIT\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1: create(); break;
+            case 2: display(); break;
+            case 3: insertElement(); break;
+            case 4: deleteElement(); break;
+            case 5: linearSearch(); break;
+            case 6: return 0;
+            default: cout << "Invalid choice\n";
+        }
+    }
+}
+//Q2
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[100], n;
+    cout << "Enter size: ";
+    cin >> n;
+    cout << "Enter " << n << " elements: ";
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (arr[i] == arr[j]) {
+                for (int k = j; k < n-1; k++) arr[k] = arr[k+1];
+                n--; j--;
+            }
+        }
+    }
+
+    cout << "Array after removing duplicates: ";
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+}
+//Q3
+#include <iostream>
+using namespace std;
+
+int main() {
+    int i;
+    int arr[5] = {1};
+    for (i = 0; i < 5; i++)
+        cout << arr[i];
+    return 0;
+}
+OUTPUT: 10000
+//Q4 a)
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, arr[100];
+    cout << "Enter size: ";
+    cin >> n;
+    cout << "Enter " << n << " elements: ";
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    for (int i = 0; i < n/2; i++) {
+        int temp = arr[i];
+        arr[i] = arr[n-i-1];
+        arr[n-i-1] = temp;
+    }
+
+    cout << "Reversed array: ";
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+}
+//Q4 b)
