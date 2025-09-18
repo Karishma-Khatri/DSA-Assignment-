@@ -1,24 +1,20 @@
 //Q1
 #include <iostream>
 using namespace std;
-
 #define MAX 100
 int arr[MAX], n = 0;
-
 void create() {
     cout << "Enter size of array: ";
     cin >> n;
     cout << "Enter " << n << " elements: ";
     for (int i = 0; i < n; i++) cin >> arr[i];
 }
-
 void display() {
     if (n == 0) { cout << "Array is empty\n"; return; }
     cout << "Array elements: ";
     for (int i = 0; i < n; i++) cout << arr[i] << " ";
     cout << endl;
 }
-
 void insertElement() {
     int pos, val;
     if (n == MAX) { cout << "Array full!\n"; return; }
@@ -30,7 +26,6 @@ void insertElement() {
     arr[pos] = val;
     n++;
 }
-
 void deleteElement() {
     int pos;
     if (n == 0) { cout << "Array empty!\n"; return; }
@@ -39,7 +34,6 @@ void deleteElement() {
     for (int i = pos; i < n-1; i++) arr[i] = arr[i+1];
     n--;
 }
-
 void linearSearch() {
     int key, found = 0;
     cout << "Enter element to search: ";
@@ -53,7 +47,6 @@ void linearSearch() {
     }
     if (!found) cout << "Element not found\n";
 }
-
 int main() {
     int choice;
     while (1) {
@@ -75,14 +68,12 @@ int main() {
 //Q2
 #include <iostream>
 using namespace std;
-
 int main() {
     int arr[100], n;
     cout << "Enter size: ";
     cin >> n;
     cout << "Enter " << n << " elements: ";
     for (int i = 0; i < n; i++) cin >> arr[i];
-
     for (int i = 0; i < n; i++) {
         for (int j = i+1; j < n; j++) {
             if (arr[i] == arr[j]) {
@@ -98,7 +89,6 @@ int main() {
 //Q3
 #include <iostream>
 using namespace std;
-
 int main() {
     int i;
     int arr[5] = {1};
@@ -110,7 +100,6 @@ OUTPUT: 10000
 //Q4 a)
 #include <iostream>
 using namespace std;
-
 int main() {
     int n, arr[100];
     cout << "Enter size: ";
@@ -123,8 +112,100 @@ int main() {
         arr[i] = arr[n-i-1];
         arr[n-i-1] = temp;
     }
-
-    cout << "Reversed array: ";
-    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+cout << "Reversed array: ";
+for (int i = 0; i < n; i++) cout << arr[i] << " ";
 }
 //Q4 b)
+#include <iostream>
+using namespace std;
+int main() {
+    int a[10][10], b[10][10], c[10][10];
+    int r1, c1, r2, c2;
+
+    cout << "Enter rows and cols of first matrix: ";
+    cin >> r1 >> c1;
+    cout << "Enter rows and cols of second matrix: ";
+    cin >> r2 >> c2;
+
+    if (c1 != r2) {
+        cout << "Matrix multiplication not possible\n";
+        return 0;
+    }
+
+    cout << "Enter first matrix:\n";
+    for (int i = 0; i < r1; i++)
+        for (int j = 0; j < c1; j++)
+            cin >> a[i][j];
+
+    cout << "Enter second matrix:\n";
+    for (int i = 0; i < r2; i++)
+        for (int j = 0; j < c2; j++)
+            cin >> b[i][j];
+
+    for (int i = 0; i < r1; i++)
+        for (int j = 0; j < c2; j++) {
+            c[i][j] = 0;
+            for (int k = 0; k < c1; k++)
+                c[i][j] += a[i][k] * b[k][j];
+        }
+
+    cout << "Result matrix:\n";
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c2; j++)
+            cout << c[i][j] << " ";
+        cout << endl;
+    }
+}
+//Q4 c)
+#include <iostream>
+using namespace std;
+int main() {
+    int a[10][10], t[10][10];
+    int r, c;
+
+    cout << "Enter rows and cols: ";
+    cin >> r >> c;
+
+    cout << "Enter matrix:\n";
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+            cin >> a[i][j];
+
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+            t[j][i] = a[i][j];
+
+    cout << "Transpose:\n";
+    for (int i = 0; i < c; i++) {
+        for (int j = 0; j < r; j++)
+            cout << t[i][j] << " ";
+        cout << endl;
+    }
+}
+//Q5
+#include <iostream>
+using namespace std;
+int main() {
+    int a[10][10], r, c;
+    cout << "Enter rows and cols: ";
+    cin >> r >> c;
+
+    cout << "Enter matrix:\n";
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+            cin >> a[i][j];
+
+    for (int i = 0; i < r; i++) {
+        int rowSum = 0;
+        for (int j = 0; j < c; j++) rowSum += a[i][j];
+        cout << "Sum of row " << i << " = " << rowSum << endl;
+    }
+
+    for (int j = 0; j < c; j++) {
+        int colSum = 0;
+        for (int i = 0; i < r; i++) colSum += a[i][j];
+        cout << "Sum of col " << j << " = " << colSum << endl;
+    }
+}
+
+
